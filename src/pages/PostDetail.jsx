@@ -16,6 +16,6 @@ export default PostDetailPage;
 
 
 export const loader = ( { params } ) => {
-  const postId = params.postId
+  const postId = params.id
   return getPost( postId )
 }
