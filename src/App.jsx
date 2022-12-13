@@ -7,6 +7,7 @@ import {
 
 import BlogLayout from './pages/BlogLayout';
 import BlogPostsPage, { loader as blogPostsLoader } from './pages/BlogPosts';
+import Error from './pages/Error.jsx';
 import NewPostPage from './pages/NewPost';
 import PostDetailPage, { loader as postDetailLoader } from './pages/PostDetail';
 import RootLayout from './pages/RootLayout';
@@ -16,7 +17,9 @@ const router = createBrowserRouter(
 	createRoutesFromElements(
 		<Route
 			path='/'
-			element={<RootLayout />}>
+			element={<RootLayout />}
+			errorElement={<Error />}
+		>
 			<Route
 				index
 				element={<WelcomePage />}
