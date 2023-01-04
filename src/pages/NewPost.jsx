@@ -1,12 +1,12 @@
-import { redirect, useNavigate } from 'react-router-dom';
+import { redirect, useActionData, useNavigate, useNavigation } from 'react-router-dom';
 
 import NewPostForm from '../components/NewPostForm';
 import { savePost } from '../util/api';
 
 function NewPostPage () {
-
-  const [error, setError] = useState();
+  const data = useActionData()
   const navigate = useNavigate();
+  const navigation = useNavigation()
 
 
 
@@ -16,9 +16,10 @@ function NewPostPage () {
 
   return (
     <>
+      {data && data.status && <p>{data.message}</p>}
       <NewPostForm
         onCancel={cancelHandler}
-        submitting={isSubmitting}
+        submitting={navigation.state === 'submitting'}
       />
     </>
   );
@@ -38,7 +39,7 @@ export async function action ( { request } ) {
 
   } catch ( error ) {
     if ( error.status === 422 ) {
-      // TBD
+      return error
     }
     throw error
   }
